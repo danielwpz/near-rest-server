@@ -33,3 +33,9 @@ $ npm run start:prod
     - `args`: Method arguments
     - `gas`: gas amount
     - `deposit`: Attached NEAR deposit in yoctoNEAR.
+
+- View contract method
+  - method: `GET`
+  - URL: `/contract/:contract_id/:method_name`
+    - `contract_id`: Contract ID(address) e.g. `my-nft.testnet`
+    - `method_name`: Method name e.g. `nft_transfer`

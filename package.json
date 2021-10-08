@@ -32,7 +32,8 @@
     "koa-bodyparser": "^4.3.0",
     "koa-compress": "^5.1.0",
     "koa-override": "^3.0.0",
-    "koa-qs": "^3.0.0"
+    "koa-qs": "^3.0.0",
+    "near-api-js": "^0.43.1"
   },
   "devDependencies": {
     "@tsed/cli-plugin-eslint": "3.11.8",
