@@ -1,10 +1,10 @@
-import {Service} from "@tsed/common";
-import {FinalExecutionOutcome} from "near-api-js/lib/providers";
-import {NearAPI} from "src/utils/near";
+import { Service } from "@tsed/common";
+import { FinalExecutionOutcome } from "near-api-js/lib/providers";
+import { NearAPI } from "src/utils/near";
 
 @Service()
 export class ContractService {
-  constructor(private readonly nearApi: NearAPI) {}
+  constructor(private readonly nearApi: NearAPI) { }
 
   async viewMethod(contractId: string, methodName: string, args?: Record<string, unknown>): Promise<string> {
     return this.nearApi.anonymousAccount.viewFunction(contractId, methodName, args);

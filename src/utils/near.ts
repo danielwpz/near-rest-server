@@ -1,4 +1,4 @@
-import {Service} from "@tsed/di";
+import { Service } from "@tsed/di";
 import config from "config";
 import * as nearApi from "near-api-js";
 
@@ -21,6 +21,6 @@ export class NearAPI {
 
     // account
     const provider = new nearApi.providers.JsonRpcProvider(config.get("network.rpc") as string);
-    this.anonymousAccount = new nearApi.Account({provider});
+    this.anonymousAccount = new nearApi.Account({ provider });
   }
 }

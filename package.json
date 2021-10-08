@@ -8,9 +8,8 @@
     "tsc:w": "tsc --project tsconfig.json -w",
     "start": "tsnd --inspect --ignore-watch node_modules --respawn --transpile-only -r tsconfig-paths/register src/index.ts",
     "start:prod": "cross-env NODE_ENV=production node dist/index.js",
-    "test:lint": "eslint src --ext .ts",
-    "test:lint:fix": "eslint src --ext .ts --fix",
-    "prettier": "prettier '{src,test}/**/*.ts' --write"
+    "lint": "eslint src --ext .ts",
+    "lint:fix": "eslint src --ext .ts --fix"
   },
   "dependencies": {
     "@koa/cors": "^3.1.0",

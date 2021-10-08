@@ -1,12 +1,12 @@
-import {Configuration, Inject} from "@tsed/di";
-import {PlatformApplication} from "@tsed/common";
+import { Configuration, Inject } from "@tsed/di";
+import { PlatformApplication } from "@tsed/common";
 import "@tsed/platform-koa"; // /!\ keep this import
 import bodyParser from "koa-bodyparser";
 import compress from "koa-compress";
 import cors from "@koa/cors";
 import "@tsed/ajv";
 import "@tsed/swagger";
-import {config, rootDir} from "./config";
+import { config, rootDir } from "./config";
 
 const methodOverride = require("koa-override");
 

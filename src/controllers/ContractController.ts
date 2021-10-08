@@ -1,11 +1,11 @@
-import {Controller, Get, Post, PathParams, BodyParams, Req, PlatformRequest} from "@tsed/common";
+import { Controller, Get, Post, PathParams, BodyParams, Req, PlatformRequest } from "@tsed/common";
 import { FinalExecutionOutcome } from "near-api-js/lib/providers";
-import {ContractService} from "src/services/ContractService";
-import {CallParams} from "../models/ContractModel";
+import { ContractService } from "src/services/ContractService";
+import { CallParams } from "../models/ContractModel";
 
 @Controller("/contract")
 export class ContractController {
-  constructor(private readonly service: ContractService) {}
+  constructor(private readonly service: ContractService) { }
 
   @Post("/:contractId/:methodName")
   async call(

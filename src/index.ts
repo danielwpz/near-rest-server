@@ -1,6 +1,6 @@
-import {$log} from "@tsed/common";
-import {PlatformKoa} from "@tsed/platform-koa";
-import {Server} from "./Server";
+import { $log } from "@tsed/common";
+import { PlatformKoa } from "@tsed/platform-koa";
+import { Server } from "./Server";
 
 async function bootstrap() {
   try {

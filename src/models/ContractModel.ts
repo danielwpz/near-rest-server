@@ -1,4 +1,4 @@
-import {Required, Default, Property} from "@tsed/schema";
+import { Required, Default, Property } from "@tsed/schema";
 
 export class CallParams {
   @Required()
