@@ -19,6 +19,10 @@ $ npm run build
 $ npm run start:prod
 ```
 
+## Accounts
+Currently all transactions are signed by accounts from local unencrypted JSON key store just like near-cli.         
+You can config the path for keystore folder in `config.keyStorePath`
+
 ## APIs
 
 ### - Contract
@@ -29,7 +33,7 @@ $ npm run start:prod
     - `contract_id`: Contract ID(address) e.g. `my-nft.testnet`
     - `method_name`: Method name e.g. `nft_transfer`
   - Body parameters:
-    - `account_id`: Caller account id
+    - `account_id`: Caller account id. (Account private key will be read from local keyStore folder.)
     - `args`: Method arguments
     - `gas`: gas amount
     - `deposit`: Attached NEAR deposit in yoctoNEAR.
