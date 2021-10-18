@@ -1,6 +1,7 @@
 import { Service } from "@tsed/common";
 import { FinalExecutionOutcome } from "near-api-js/lib/providers";
-import { NearAPI } from "src/utils/near";
+import { NearAPI } from "../utils/near";
+import BN from 'bn.js';
 
 @Service()
 export class ContractService {
@@ -24,8 +25,8 @@ export class ContractService {
       contractId,
       methodName,
       args: args,
-      gas,
-      attachedDeposit: deposit
+      gas: gas ? new BN(gas) : undefined,
+      attachedDeposit: deposit ? new BN(deposit) : undefined
     });
   }
 }

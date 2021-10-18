@@ -21,6 +21,7 @@ export class NearAPI {
 
     // account
     const provider = new nearApi.providers.JsonRpcProvider(config.get("network.rpc") as string);
-    this.anonymousAccount = new nearApi.Account({ provider });
+    // eslint-disable-next-line
+    this.anonymousAccount = new nearApi.Account({ provider } as any, 'nobody.near');
   }
 }

@@ -1,6 +1,6 @@
 import { Controller, Get, Post, PathParams, BodyParams, Req, PlatformRequest } from "@tsed/common";
 import { FinalExecutionOutcome } from "near-api-js/lib/providers";
-import { ContractService } from "src/services/ContractService";
+import { ContractService } from "../services/ContractService";
 import { CallParams } from "../models/ContractModel";
 
 @Controller("/contract")
