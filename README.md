@@ -20,8 +20,8 @@ $ npm run build
 $ npm run start:prod
 ```
 
-## Accounts
-Currently all transactions are signed by accounts from local unencrypted JSON key store just like near-cli.         
+## NEAR Accounts
+Currently all transactions are signed by accounts from local unencrypted JSON key store (by default `~/.near-credentials`) just like near-cli.         
 You can config the path for keystore folder in `config.keyStorePath`
 
 ## APIs
