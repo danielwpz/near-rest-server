@@ -1,7 +1,7 @@
 import { Service } from "@tsed/common";
 import { FinalExecutionOutcome } from "near-api-js/lib/providers";
 import { NearAPI } from "../utils/near";
-import BN from 'bn.js';
+import { NEAR, Gas } from 'near-units';
 
 @Service()
 export class ContractService {
@@ -16,8 +16,8 @@ export class ContractService {
     contractId: string,
     methodName: string,
     args: Record<string, unknown>,
-    gas?: string,
-    deposit?: string
+    gas: string,
+    deposit: string
   ): Promise<FinalExecutionOutcome> {
     const near = await this.nearApi.near;
     const account = await near.account(accountId);
@@ -25,8 +25,8 @@ export class ContractService {
       contractId,
       methodName,
       args: args,
-      gas: gas ? new BN(gas) : undefined,
-      attachedDeposit: deposit ? new BN(deposit) : undefined
+      gas: Gas.parse(gas),
+      attachedDeposit: NEAR.parse(deposit)
     });
   }
 }

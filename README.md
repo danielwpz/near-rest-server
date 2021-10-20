@@ -36,8 +36,8 @@ You can config the path for keystore folder in `config.keyStorePath`
   - Body parameters:
     - `account_id`: Caller account id. (Account private key will be read from local keyStore folder.)
     - `args`: Method arguments
-    - `gas`: gas amount
-    - `deposit`: Attached NEAR deposit in yoctoNEAR.
+    - `gas`: Gas amount (e.g. `300 Tgas`, `1 Ggas`), see [near-units](https://github.com/near/units-js)
+    - `deposit`: Attached NEAR deposit (e.g. `10N`, `1yN`), see [near-units](https://github.com/near/units-js)
 
 - View contract method
   - method: `GET`

@@ -7,9 +7,9 @@ export class CallParams {
   @Property()
   args: Record<string, unknown>;
 
-  @Default("200000000000000")
-  gas: string;
+  @Default("200 Tgas")
+  gas: string = "200 Tgas";
 
   @Default("0")
-  deposit: string;
+  deposit: string = "0";
 }

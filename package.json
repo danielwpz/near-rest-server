@@ -34,7 +34,8 @@
     "koa-override": "^3.0.0",
     "koa-qs": "^3.0.0",
     "lodash": "^4.17.21",
-    "near-api-js": "^0.43.1"
+    "near-api-js": "^0.43.1",
+    "near-units": "^0.1.9"
   },
   "devDependencies": {
     "@tsed/cli-plugin-eslint": "3.11.8",
