@@ -4,11 +4,13 @@ import { Server } from "./Server";
 
 async function bootstrap() {
   try {
+    const network = process.env.NODE_ENV || 'testnet';
+    $log.info(`NEAR network is: ${network}`);
+
     $log.debug("Start server...");
     const platform = await PlatformKoa.bootstrap(Server);
 
     await platform.listen();
-    $log.debug("Server initialized");
   } catch (er) {
     $log.error(er);
   }

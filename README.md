@@ -12,6 +12,7 @@
 $ npm install
 
 # serve
+$ export NODE_ENV=mainnet/testnet
 $ npm run start
 
 # build for production
@@ -43,3 +44,6 @@ You can config the path for keystore folder in `config.keyStorePath`
   - URL: `/contract/:contract_id/:method_name`
     - `contract_id`: Contract ID(address) e.g. `my-nft.testnet`
     - `method_name`: Method name e.g. `nft_transfer`
+  - parameters:
+    - view args can be provided through either JSON body or url query.
+    - If body is provided, url query will be ignored.
