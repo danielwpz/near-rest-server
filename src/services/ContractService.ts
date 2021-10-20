@@ -1,4 +1,4 @@
-import { Service } from "@tsed/common";
+import { Service, $log } from "@tsed/common";
 import { FinalExecutionOutcome } from "near-api-js/lib/providers";
 import { NearAPI } from "../utils/near";
 import { NEAR, Gas } from 'near-units';
@@ -19,6 +19,14 @@ export class ContractService {
     gas: string,
     deposit: string
   ): Promise<FinalExecutionOutcome> {
+    $log.info(`Calling ${contractId}.${methodName}() with:`);
+    $log.info({
+      accountId,
+      args,
+      gas,
+      deposit
+    });
+
     const near = await this.nearApi.near;
     const account = await near.account(accountId);
     return account.functionCall({

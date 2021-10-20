@@ -36,6 +36,7 @@ const methodOverride = require("koa-override");
   },
   exclude: ["**/*.spec.ts"]
 })
+
 export class Server {
   @Inject()
   app: PlatformApplication;

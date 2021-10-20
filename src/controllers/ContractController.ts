@@ -3,7 +3,7 @@ import { FinalExecutionOutcome } from "near-api-js/lib/providers";
 import _ from 'lodash';
 import { ContractService } from "../services/ContractService";
 import { CallParams } from "../models/ContractModel";
-import ParseNumberMiddleware from "src/middlewares/ParseNumberMiddleware";
+import ParseNumberMiddleware from "../middlewares/ParseNumberMiddleware";
 
 @Controller("/contract")
 export class ContractController {
@@ -15,8 +15,6 @@ export class ContractController {
     @PathParams("methodName") methodName: string,
     @BodyParams(CallParams) params: CallParams
   ): Promise<FinalExecutionOutcome> {
-    console.log(`Calling ${contractId}.${methodName} with args:`);
-    console.log(params);
     const result = await this.service.callMethod(params.account_id, contractId, methodName, params.args || {}, params.gas, params.deposit);
     return result;
   }
