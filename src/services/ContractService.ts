@@ -7,11 +7,17 @@ import { NEAR, Gas } from 'near-units';
 export class ContractService {
   constructor(private readonly nearApi: NearAPI) { }
 
-  async viewMethod(contractId: string, methodName: string, args?: Record<string, unknown>): Promise<string> {
-    return this.nearApi.anonymousAccount.viewFunction(contractId, methodName, args);
+  async viewMethod(
+    networkId: string,
+    contractId: string, 
+    methodName: string, 
+    args?: Record<string, unknown>
+  ): Promise<string> {
+    return this.nearApi.getAnonymousAccount(networkId).viewFunction(contractId, methodName, args);
   }
 
   async callMethod(
+    networkId: string,
     accountId: string,
     contractId: string,
     methodName: string,
@@ -27,7 +33,7 @@ export class ContractService {
       deposit
     });
 
-    const near = await this.nearApi.near;
+    const near = await this.nearApi.getNear(networkId);
     const account = await near.account(accountId);
     return account.functionCall({
       contractId,

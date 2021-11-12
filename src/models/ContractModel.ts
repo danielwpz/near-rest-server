@@ -1,6 +1,9 @@
 import { Required, Default, Property } from "@tsed/schema";
 
 export class CallParams {
+  @Default("testnet")
+  network_id: string;
+
   @Required()
   account_id: string;
 

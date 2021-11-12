@@ -1,27 +1,43 @@
 import { Service } from "@tsed/di";
 import config from "config";
 import * as nearApi from "near-api-js";
+import _ from "lodash";
 
 @Service()
 export class NearAPI {
-  near: Promise<nearApi.Near>;
-  anonymousAccount: nearApi.Account;
+  nearInstances: {[network: string]: Promise<nearApi.Near>};
+  anonymousAccounts: {[network: string]: nearApi.Account};
 
   constructor() {
     const keyStore = new nearApi.keyStores.UnencryptedFileSystemKeyStore(config.get("keyStorePath"));
-    const nearConfig = {
-      networkId: config.get("network.id") as string,
-      nodeUrl: config.get("network.rpc") as string,
-      deps: {
-        keyStore
-      }
-    };
-
-    this.near = nearApi.connect(nearConfig);
-
-    // account
-    const provider = new nearApi.providers.JsonRpcProvider(config.get("network.rpc") as string);
     // eslint-disable-next-line
-    this.anonymousAccount = new nearApi.Account({ provider } as any, 'nobody.near');
+    const networks: Record<string, any> = config.get("networkConfig");
+
+    this.nearInstances = _.mapValues(networks, config => {
+      const nearConfig = {
+        networkId: config.id,
+        nodeUrl: config.rpc,
+        deps: {
+          keyStore
+        }
+      };
+
+      return nearApi.connect(nearConfig);
+    });
+
+    this.anonymousAccounts = _.mapValues(networks, config => {
+      const provider = new nearApi.providers.JsonRpcProvider(config.rpc);
+      // eslint-disable-next-line
+      return new nearApi.Account({ provider } as any, 'nobody.near');
+    });
+
+  }
+
+  async getNear(networkId: string): Promise<nearApi.Near> {
+    return this.nearInstances[networkId];
+  }
+
+  getAnonymousAccount(networkId: string): nearApi.Account {
+    return this.anonymousAccounts[networkId];
   }
 }
