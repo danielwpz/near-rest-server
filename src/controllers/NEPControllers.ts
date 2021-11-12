@@ -5,7 +5,6 @@ import { NEP } from "../neps/NEPStandard";
 import NEP171 from "../neps/nep171";
 import { BodyParams, PathParams, QueryParams } from "@tsed/platform-params";
 import { ContractService } from "../services/ContractService";
-import { CallParams } from "../models/ContractModel";
 
 const standards: NEP[] = [
   NEP171
