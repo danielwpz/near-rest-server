@@ -11,12 +11,13 @@ export class ContractController {
 
   @Post("/:contractId/:methodName")
   async call(
+    @PathParams("networkId") networkId: string,
     @PathParams("contractId") contractId: string,
     @PathParams("methodName") methodName: string,
     @BodyParams(CallParams) params: CallParams
   ): Promise<FinalExecutionOutcome> {
     const result = await this.service.callMethod(
-      params.network_id,
+      networkId,
       params.account_id, 
       contractId, 
       methodName, 
@@ -31,10 +32,12 @@ export class ContractController {
   @UseBefore(ParseNumberMiddleware)
   async view(
     @Req() req: PlatformRequest,
+    @PathParams("networkId") networkId: string,
     @PathParams("contractId") contractId: string,
     @PathParams("methodName") methodName: string
   ): Promise<string> {
     return this.service.viewMethod(
+      networkId,
       contractId, 
       methodName, 
       _.isEmpty(req.body) ? req.query : req.body);
