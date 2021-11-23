@@ -34,10 +34,16 @@ export class NearAPI {
   }
 
   async getNear(networkId: string): Promise<nearApi.Near> {
+    if (!this.nearInstances[networkId]) {
+      throw new Error(`wrong network id: ${networkId}`);
+    }
     return this.nearInstances[networkId];
   }
 
   getAnonymousAccount(networkId: string): nearApi.Account {
+    if (!this.anonymousAccounts[networkId]) {
+      throw new Error(`wrong network id: ${networkId}`);
+    }
     return this.anonymousAccounts[networkId];
   }
 }
