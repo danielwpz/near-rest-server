@@ -16,7 +16,7 @@ const methodOverride = require("koa-override");
   httpPort: process.env.PORT || 8083,
   httpsPort: false, // CHANGE
   mount: {
-    "/": [`${rootDir}/controllers/**/*.ts`]
+    "/:networkId/": [`${rootDir}/controllers/**/*.ts`]
   },
   swagger: [
     {

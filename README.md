@@ -12,10 +12,10 @@
 $ npm install
 
 # serve
-$ export NODE_ENV=mainnet/testnet
 $ npm run start
 
-# build for production
+# build for production 
+# NOTE: currently smart contract panic messages won't be returned in prod mode
 $ npm run build
 $ npm run start:prod
 ```
@@ -26,11 +26,12 @@ You can config the path for keystore folder in `config.keyStorePath`
 
 ## APIs
 
-### - Contract
+### - General Contracts
 
 - Call contract method
   - method: `POST`
-  - URL: `/contract/:contract_id/:method_name`
+  - URL: `/:network_id/contract/:contract_id/:method_name`
+    - `network_id`: `mainnet` or `testnet`
     - `contract_id`: Contract ID(address) e.g. `my-nft.testnet`
     - `method_name`: Method name e.g. `nft_transfer`
   - Body parameters:
@@ -41,9 +42,37 @@ You can config the path for keystore folder in `config.keyStorePath`
 
 - View contract method
   - method: `GET`
-  - URL: `/contract/:contract_id/:method_name`
+  - URL: `/:network_id/contract/:contract_id/:method_name`
+    - `network_id`: `mainnet` or `testnet`
     - `contract_id`: Contract ID(address) e.g. `my-nft.testnet`
     - `method_name`: Method name e.g. `nft_transfer`
   - parameters:
     - view args can be provided through either JSON body or url query.
     - If body is provided, url query will be ignored.
+
+### - NEP Contracts
+
+#### NEP171
+- `GET` `/:network_id/nep171/:contract_id/nft_token`
+  - Get one NFT
+  - Query Params
+    - `token_id`: token id
+
+- `POST` `/:network_id/nep171/:contract_id/nft_transfer`
+  - Transfer an NFT
+  - Body Params
+    - `*account_id`: calling account id
+    - `*deposit`: deposit, MUST be `1yN`
+    - `args`
+      - `*receiver_id`: receiver id
+      - `*token_id`: token id
+      - `approval_id`: approval id
+      - `memo`: memo string
+
+## Contribute
+
+### NEP Standards
+To add new endpoints for any NEP standards. You can take `neps/nep171.ts` as an example.      
+1. Create a new file named by NEP standard (e.g. `nep141.ts`) in neps folder.      
+2. Export a dictionary of NEP type, which should describe the standard name, view methods and change methods.    
+3. For each view/change method, define its name and call arguments.

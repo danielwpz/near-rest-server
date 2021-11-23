@@ -19,8 +19,8 @@ for (const standard of standards) {
   // build all view methods
   if (standard.viewMethods) {
     for (const viewMethod of standard.viewMethods) {
-      const methodBody = async function (contractId: string, query: typeof viewMethod.callArgs): Promise<unknown> {
-        return this.service.viewMethod(contractId, viewMethod.methodName, query);
+      const methodBody = async function (networkId: string, contractId: string, query: typeof viewMethod.callArgs): Promise<unknown> {
+        return this.service.viewMethod(networkId, contractId, viewMethod.methodName, query);
       }
 
       Object.defineProperty(NEPController.prototype, viewMethod.methodName, {
@@ -28,10 +28,12 @@ for (const standard of standards) {
       });
 
       // decorate parameter
-      const pathDecorator = PathParams('contractId');
-      pathDecorator(NEPController.prototype, viewMethod.methodName, 0);
+      const networkIdDecorator = PathParams('networkId');
+      networkIdDecorator(NEPController.prototype, viewMethod.methodName, 0);
+      const contractIdDecorator = PathParams('contractId');
+      contractIdDecorator(NEPController.prototype, viewMethod.methodName, 1);
       const paramDecorator = QueryParams(viewMethod.callArgs);
-      paramDecorator(NEPController.prototype, viewMethod.methodName, 1);
+      paramDecorator(NEPController.prototype, viewMethod.methodName, 2);
 
       const methodDecorator = Get(`/:contractId/${viewMethod.methodName}`);
       const descriptor = Object.getOwnPropertyDescriptor(NEPController.prototype, viewMethod.methodName);
@@ -57,11 +59,19 @@ for (const standard of standards) {
         deposit: string = "0";
       }
 
-      const methodBody = async function (contractId: string, body: ChangeMethodArgType): Promise<unknown> {
+      const methodBody = async function (networkId: string, contractId: string, body: ChangeMethodArgType): Promise<unknown> {
         console.log(`calling ${changeMethod.methodName}`);
         console.log(contractId);
         console.log(body);
-        return this.service.callMethod(body.account_id, contractId, changeMethod.methodName, body.args, body.gas, body.deposit);
+        return this.service.callMethod(
+          networkId, 
+          body.account_id, 
+          contractId, 
+          changeMethod.methodName, 
+          body.args, 
+          body.gas, 
+          body.deposit
+        );
       }
 
       Object.defineProperty(NEPController.prototype, changeMethod.methodName, {
@@ -72,10 +82,12 @@ for (const standard of standards) {
       const descriptor = Object.getOwnPropertyDescriptor(NEPController.prototype, changeMethod.methodName);
       Reflect.decorate([methodDecorator], NEPController.prototype, changeMethod.methodName, descriptor); 
 
-      const pathDecorator = PathParams('contractId');
-      pathDecorator(NEPController.prototype, changeMethod.methodName, 0);
+      const networkIdDecorator = PathParams('networkId');
+      networkIdDecorator(NEPController.prototype, changeMethod.methodName, 0);
+      const contractIdDecorator = PathParams('contractId');
+      contractIdDecorator(NEPController.prototype, changeMethod.methodName, 1);
       const bodyDecorator = BodyParams(ChangeMethodArgType);
-      bodyDecorator(NEPController.prototype, changeMethod.methodName, 1);
+      bodyDecorator(NEPController.prototype, changeMethod.methodName, 2);
     }
   }
 

@@ -11,11 +11,20 @@ export class ContractController {
 
   @Post("/:contractId/:methodName")
   async call(
+    @PathParams("networkId") networkId: string,
     @PathParams("contractId") contractId: string,
     @PathParams("methodName") methodName: string,
     @BodyParams(CallParams) params: CallParams
   ): Promise<FinalExecutionOutcome> {
-    const result = await this.service.callMethod(params.account_id, contractId, methodName, params.args || {}, params.gas, params.deposit);
+    const result = await this.service.callMethod(
+      networkId,
+      params.account_id, 
+      contractId, 
+      methodName, 
+      params.args || {}, 
+      params.gas, 
+      params.deposit
+    );
     return result;
   }
 
@@ -23,9 +32,14 @@ export class ContractController {
   @UseBefore(ParseNumberMiddleware)
   async view(
     @Req() req: PlatformRequest,
+    @PathParams("networkId") networkId: string,
     @PathParams("contractId") contractId: string,
     @PathParams("methodName") methodName: string
   ): Promise<string> {
-    return this.service.viewMethod(contractId, methodName, _.isEmpty(req.body) ? req.query : req.body);
+    return this.service.viewMethod(
+      networkId,
+      contractId, 
+      methodName, 
+      _.isEmpty(req.body) ? req.query : req.body);
   }
 }
