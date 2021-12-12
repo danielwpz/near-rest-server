@@ -21,6 +21,14 @@ class NFTTokenArgs {
   token_id: string;
 }
 
+class NFTTokensArgs {
+  @Property()
+  from_index?: string;
+
+  @Property()
+  limit?: number;
+}
+
 const NEP171: NEP = {
   name: 'nep171',
   changeMethods: [
@@ -33,6 +41,10 @@ const NEP171: NEP = {
     {
       methodName: 'nft_token',
       callArgs: NFTTokenArgs
+    },
+    {
+      methodName: 'nft_tokens',
+      callArgs: NFTTokensArgs
     }
   ]
 }
