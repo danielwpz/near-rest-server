@@ -5,7 +5,7 @@ module.exports = {
   "networkConfig": {
     "mainnet": {
       "id": "mainnet",
-      "rpc": "https://rpc.mainnet.near.org"
+      "rpc": "https://public-rpc.blockpi.io/http/near"
     },
     "testnet": {
       "id": "testnet",

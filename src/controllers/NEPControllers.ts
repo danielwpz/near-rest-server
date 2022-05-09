@@ -3,11 +3,13 @@ import { Get, Post, Required, Default, Property } from "@tsed/schema";
 import { NEP } from "../neps/NEPStandard";
 
 import NEP171 from "../neps/nep171";
+import NEP141 from "../neps/nep141";
 import { BodyParams, PathParams, QueryParams } from "@tsed/platform-params";
 import { ContractService } from "../services/ContractService";
 
 const standards: NEP[] = [
-  NEP171
+  NEP171,
+  NEP141,
 ]
 
 for (const standard of standards) {
