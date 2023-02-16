@@ -43,6 +43,7 @@ test/**/*.js.map
 # Test
 /.tmp
 /.nyc_output
+local.js
 
 # IDE
 .vscode
